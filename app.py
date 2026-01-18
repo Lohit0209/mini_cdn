@@ -141,6 +141,19 @@ def get_ultimate_css(theme):
             background: linear-gradient(180deg, #667eea, #764ba2);
             border-radius: 10px;
         }
+
+        /* Prevent text overflow */
+        [data-testid="stExpander"] {
+            background: rgba(102,126,234,0.1);
+            border-radius: 12px;
+            border: 1px solid rgba(102,126,234,0.2);
+            margin-top: 20px;
+        }
+
+        [data-testid="stExpander"] summary {
+            font-weight: 600;
+            font-size: 16px;
+        }
         </style>
         """
     else:
@@ -177,6 +190,18 @@ def get_ultimate_css(theme):
             padding: 14px 36px;
             font-weight: 700;
             border: none;
+        }
+
+        [data-testid="stExpander"] {
+            background: rgba(79,70,229,0.08);
+            border-radius: 12px;
+            border: 1px solid rgba(79,70,229,0.2);
+            margin-top: 20px;
+        }
+
+        [data-testid="stExpander"] summary {
+            font-weight: 600;
+            font-size: 16px;
         }
         </style>
         """
@@ -332,9 +357,14 @@ if "current_round" not in st.session_state:
 if "prev_best" not in st.session_state:
     st.session_state.prev_best = None
 
-# ======================= MAIN CONTROLS =======================
-st.markdown("<div style='height:24px'></div>", unsafe_allow_html=True)
+# ======================= HEADER =======================
+st.markdown("""
+<h1 style='text-align:center; margin-bottom:40px;'>
+    ⚡ Nexus Load Balancer Pro
+</h1>
+""", unsafe_allow_html=True)
 
+# ======================= MAIN CONTROLS =======================
 btn_col1, btn_col2, btn_col3 = st.columns([2, 2, 6])
 
 with btn_col1:
@@ -343,9 +373,14 @@ with btn_col1:
 with btn_col2:
     stop_btn = st.button("⏸️ STOP", use_container_width=True)
 
+st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
+
 info_container = st.container()
 chart_container = st.container()
-analytics_expander = st.expander("Detailed Analytics", expanded=False)
+
+st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
+
+analytics_expander = st.expander("📊 Detailed Analytics", expanded=False)
 
 
 # ======================= BUTTON HANDLERS =======================
