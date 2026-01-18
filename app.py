@@ -345,7 +345,8 @@ with btn_col2:
 
 info_container = st.container()
 chart_container = st.container()
-analytics_expander = st.expander("📊 DETAILED ANALYTICS", expanded=False)
+analytics_expander = st.expander("Detailed Analytics", expanded=False)
+
 
 # ======================= BUTTON HANDLERS =======================
 if stop_btn:
