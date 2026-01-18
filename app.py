@@ -563,7 +563,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-# ======================= PLOTLY DASHBOARD =======================
+# ======================= PLOTLY DASHBOARD (FIXED) =======================
 def render_charts(best_server=None):
     data = st.session_state.monitoring_data
     if not data["plot_time"]:
@@ -578,7 +578,9 @@ def render_charts(best_server=None):
             "⚠️ Error Rate (%)",
             "📡 Bandwidth (Mbps)",
             "🎯 Selection History"
-        ]
+        ],
+        vertical_spacing=0.12,    # FIXED: Add spacing between rows
+        horizontal_spacing=0.10   # FIXED: Add spacing between columns
     )
 
     colors = ["#6366f1", "#ec4899", "#22c55e", "#f97316", "#0ea5e9"]
@@ -661,8 +663,14 @@ def render_charts(best_server=None):
         height=900,
         template="plotly_dark" if st.session_state.theme == "dark" else "plotly_white",
         hovermode="x unified",
-        margin=dict(t=80, l=60, r=60, b=60)
+        margin=dict(t=100, l=60, r=60, b=60),  # FIXED: Increased top margin for titles
+        font=dict(size=11)  # FIXED: Slightly smaller font to prevent overlap
     )
+    
+    # FIXED: Update subplot title annotations to prevent overlap
+    for annotation in fig['layout']['annotations']:
+        annotation['font'] = dict(size=13, weight='bold')
+        annotation['yshift'] = 5  # Add some vertical offset
 
     st.plotly_chart(fig, use_container_width=True)
 
