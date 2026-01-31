@@ -380,6 +380,41 @@ def get_ultimate_css(theme):
 
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* Logo container next to sidebar */
+.nexus-logo {
+    position: fixed;
+    top: 18px;
+    left: 310px; /* aligns right after sidebar */
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Logo image */
+.nexus-logo img {
+    height: 48px;       /* professional size */
+    width: auto;
+}
+
+/* Optional subtle divider */
+.nexus-logo::after {
+    content: '';
+    height: 28px;
+    width: 1px;
+    background: rgba(255,255,255,0.15);
+    margin-left: 10px;
+}
+</style>
+
+<div class="nexus-logo">
+    <img src="assets/nexus_logo.png" alt="Nexus Logo">
+</div>
+""", unsafe_allow_html=True)
+
+
 # ======================= SIDEBAR - STORE VALUES IN SESSION STATE =======================
 with st.sidebar:
     st.markdown("""
