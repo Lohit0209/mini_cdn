@@ -598,9 +598,7 @@ st.markdown("""
 <h1 style='text-align:center; margin-bottom:0.25rem;'>
     ⚡ Nexus
 </h1>
-<p style='text-align:center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2.5rem;'>
-    Intelligent server monitoring & selection powered by adaptive algorithms
-</p>
+
 """, unsafe_allow_html=True)
 
 
