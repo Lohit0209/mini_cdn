@@ -382,6 +382,21 @@ st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
 st.markdown("""
 <style>
+.nexus-logo {
+    position: fixed;
+    top: 18px;
+    left: 310px; /* right of sidebar */
+    z-index: 1001;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="nexus-logo">', unsafe_allow_html=True)
+st.image("nexus_logo.png", width=52)
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
 :root {
     --sidebar-width: 300px;
 }
@@ -403,10 +418,7 @@ st.markdown("""
 }
 </style>
 
-<div class="nexus-logo">
-    <img src="nexus_logo.png" alt="Nexus Logo">
-</div>
-""", unsafe_allow_html=True)
+
 
 
 # ======================= SIDEBAR - STORE VALUES IN SESSION STATE =======================
