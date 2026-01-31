@@ -381,6 +381,16 @@ def get_ultimate_css(theme):
     .glow-effect {
         animation: glow 3s ease-in-out infinite;
     }
+   
+[data-testid="stHeader"] {
+    display: none !important;
+}
+
+
+h1:first-of-type {
+    display: none !important;
+}
+
     </style>
     """
 
