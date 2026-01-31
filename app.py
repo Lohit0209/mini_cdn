@@ -10,6 +10,12 @@ from datetime import datetime
 import random
 
 from probe import probe_server
+import base64
+
+def load_image_base64(path):
+    with open(path, "rb") as f:
+        return base64.b64encode(f.read()).decode()
+
 
 st.set_page_config(
     page_title="Nexus",
@@ -422,17 +428,33 @@ st.markdown("""
 
 # ======================= SIDEBAR - STORE VALUES IN SESSION STATE =======================
 with st.sidebar:
-    st.markdown("""
-    <div style="text-align:center; padding:1.5rem 1rem;">
-        <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚙️</div>
-        <h2 style="margin-bottom:0.5rem;">Control Panel</h2>
-        <p style="font-size:0.8125rem; opacity:0.7; color: var(--text-secondary);">
-            Configure monitoring & servers
-        </p>
-    </div>
-    """, unsafe_allow_html=True)
+    logo_base64 = load_image_base64("nexus_logo.png")
 
-    st.markdown("---")
+    st.markdown(
+        f"""
+        <div style="
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 0.6rem 1rem 0.6rem;
+            margin-bottom: 0.5rem;
+        ">
+            <img src="data:image/png;base64,{logo_base64}"
+                 style="height:32px; width:auto;" />
+            <span style="
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: #e5e7eb;
+                letter-spacing: 0.3px;
+            ">
+                Nexus
+            </span>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
 
     
     st.markdown("### 🌐 Server List")
