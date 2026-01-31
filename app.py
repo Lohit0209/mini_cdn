@@ -381,34 +381,39 @@ def get_ultimate_css(theme):
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
 
-# =================== LOGO — FINAL POSITION FIX ===================
+# =================== TOP HEADER WITH LOGO ===================
 
 st.markdown("""
 <style>
-/* Sidebar width reference */
-:root {
-    --sidebar-width: 300px;
+/* Header container */
+.nexus-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-top: -10px;
+    margin-bottom: 28px;
 }
 
-/* Logo container */
-.nexus-logo {
-    position: fixed;
-    top: 86px; /* aligns with main content top */
-    left: calc(var(--sidebar-width) + 32px);
-    z-index: 1001;
-}
-
-/* Logo image */
-.nexus-logo img {
-    height: 56px;   /* prominent but professional */
+/* Logo sizing — NORMAL, PROFESSIONAL */
+.nexus-header img {
+    height: 35px;   /* <-- correct logo size */
     width: auto;
 }
-</style>
-""", unsafe_allow_html=True)
 
-st.markdown('<div class="nexus-logo">', unsafe_allow_html=True)
-st.image("nexus_logo.png")
-st.markdown('</div>', unsafe_allow_html=True)
+/* Title text next to logo */
+.nexus-header .title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+}
+</style>
+
+<div class="nexus-header">
+    <img src="nexus_logo.png" alt="Nexus Logo">
+    <div class="title">Nexus</div>
+</div>
+""", unsafe_allow_html=True)
 
 
 
