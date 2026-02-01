@@ -527,7 +527,7 @@ if "prev_best" not in st.session_state:
 # ======================= HEADER =======================
 st.markdown("""
 <h1 style='text-align:center; margin-bottom:0.25rem;'>
-    ⚡ Nexus Load Balancer Pro
+    ⚡ Nexus
 </h1>
 <p style='text-align:center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2.5rem;'>
     Intelligent server monitoring & selection powered by adaptive algorithms
