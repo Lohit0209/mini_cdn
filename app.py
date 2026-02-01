@@ -19,6 +19,38 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+st.markdown("""
+<style>
+/* === LOGO CONTAINER === */
+.nexus-logo {
+    position: fixed;
+    top: 1.1rem;
+    left: calc(18rem + 1rem); /* default sidebar width */
+    z-index: 1000;
+    transition: left 0.3s ease;
+}
+
+/* Logo image */
+.nexus-logo img {
+    width: 110px;
+    height: auto;
+    filter: drop-shadow(0 0 8px rgba(130,100,255,0.45));
+}
+
+/* Sidebar collapsed (mobile / toggled) */
+[data-testid="stSidebar"][aria-expanded="false"] ~ .nexus-logo {
+    left: 1.2rem;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 900px) {
+    .nexus-logo {
+        left: 1rem;
+    }
+}
+</style>
+""", unsafe_allow_html=True)
+
 
 
 # ======================= DEFAULT SERVERS =======================
@@ -380,7 +412,14 @@ def get_ultimate_css(theme):
         animation: glow 3s ease-in-out infinite;
     }
     </style>
+    
     """
+    st.markdown("""
+<div class="nexus-logo">
+    <img src="nexus_logo.png" alt="Nexus Logo">
+</div>
+""", unsafe_allow_html=True)
+
 
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
