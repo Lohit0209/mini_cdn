@@ -28,16 +28,21 @@ st.markdown("""
 [data-testid="stHeader"]::after {
     content: "";
     position: absolute;
-    top: 0.75rem;
+    top: 0.65rem;
     left: 22rem;
-    width: 110px;
-    height: 40px;
+
+    width: 90px;
+    height: 36px;
+
     background-image: url("data:image/png;base64,""" + LOGO_BASE64 + """);
     background-size: contain;
     background-repeat: no-repeat;
-    filter: drop-shadow(0 0 10px rgba(139,92,246,0.55));
+    background-position: center;
+
+    filter: drop-shadow(0 0 8px rgba(139,92,246,0.45));
     pointer-events: none;
 }
+
 
 /* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
 .nexus-logo {
