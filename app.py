@@ -21,28 +21,22 @@ st.set_page_config(
 )
 st.markdown("""
 <style>
-/* === LOGO CONTAINER === */
+/* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
 .nexus-logo {
     position: fixed;
-    top: 1.1rem;
-    left: calc(18rem + 1rem); /* default sidebar width */
-    z-index: 1000;
-    transition: left 0.3s ease;
+    top: 1rem;
+    left: 22rem; /* actual Streamlit sidebar width in wide mode */
+    z-index: 1001;
 }
 
 /* Logo image */
 .nexus-logo img {
     width: 110px;
     height: auto;
-    filter: drop-shadow(0 0 8px rgba(130,100,255,0.45));
+    filter: drop-shadow(0 0 10px rgba(139,92,246,0.55));
 }
 
-/* Sidebar collapsed (mobile / toggled) */
-[data-testid="stSidebar"][aria-expanded="false"] ~ .nexus-logo {
-    left: 1.2rem;
-}
-
-/* Mobile responsiveness */
+/* Mobile / sidebar collapsed fallback */
 @media (max-width: 900px) {
     .nexus-logo {
         left: 1rem;
@@ -50,6 +44,12 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
+st.markdown("""
+<div class="nexus-logo">
+    <img src="nexus_logo.png" alt="Nexus Logo">
+</div>
+""", unsafe_allow_html=True)
+
 
 
 
@@ -414,12 +414,7 @@ def get_ultimate_css(theme):
     </style>
     
     """
-    st.markdown("""
-<div class="nexus-logo">
-    <img src="nexus_logo.png" alt="Nexus Logo">
-</div>
-""", unsafe_allow_html=True)
-
+    
 
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
@@ -572,9 +567,7 @@ st.markdown("""
 </p>
 """, unsafe_allow_html=True)
 
-col1, col2, col3 = st.columns([1, 1.2, 1])
-with col2:
-    st.image("nexus_logo.png", width=120)   # ← resize here
+
 
 
 # ======================= MAIN CONTROLS =======================
