@@ -57,7 +57,7 @@ st.markdown("""
 
 /* Logo image */
 .nexus-logo img {
-    width: 70px;
+    width: 10px;
     height: auto;
     filter: drop-shadow(0 0 10px rgba(139,92,246,0.55));
 }
