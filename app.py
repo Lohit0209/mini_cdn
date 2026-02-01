@@ -526,13 +526,16 @@ if "prev_best" not in st.session_state:
 
 # ======================= HEADER =======================
 st.markdown("""
-<h1 style='text-align:center; margin-bottom:0.25rem;'>
-    ⚡ Nexus
-</h1>
-<p style='text-align:center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2.5rem;'>
+<h1 style='text-align:center; margin-bottom:0.25rem;'>⚡ Nexus</h1>
+<p style='text-align:center; color: var(--text-secondary); margin-bottom: 1rem;'>
     Intelligent server monitoring & selection powered by adaptive algorithms
 </p>
 """, unsafe_allow_html=True)
+
+col1, col2, col3 = st.columns([1, 1.2, 1])
+with col2:
+    st.image("nexus_logo.png", width=120)   # ← resize here
+
 
 # ======================= MAIN CONTROLS =======================
 btn_col1, btn_col2, btn_col3 = st.columns([2, 2, 6])
