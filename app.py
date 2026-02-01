@@ -397,40 +397,6 @@ h1:first-of-type {
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
 
-# =================== TOP HEADER WITH LOGO ===================
-
-st.markdown("""
-<style>
-/* Header container */
-.nexus-header {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    margin-top: -10px;
-    margin-bottom: 28px;
-}
-
-/* Logo sizing — NORMAL, PROFESSIONAL */
-.nexus-header img {
-    height: 35px;   /* <-- correct logo size */
-    width: auto;
-}
-
-/* Title text next to logo */
-.nexus-header .title {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: var(--text-primary);
-    letter-spacing: -0.01em;
-}
-</style>
-
-<div class="nexus-header">
-    <img src="nexus_logo.png" alt="Nexus Logo">
-    <div class="title">Nexus</div>
-</div>
-""", unsafe_allow_html=True)
-
 
 
 
