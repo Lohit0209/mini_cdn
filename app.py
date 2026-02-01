@@ -24,77 +24,52 @@ LOGO_BASE64 = base64.b64encode(open("nexus_logo.png", "rb").read()).decode()
 
 st.markdown("""
 <style>
-/* === FIX LOGO TO STREAMLIT HEADER === */
-[data-testid="stHeader"]::after {
-    content: "";
-    position: absolute;
-    top: 0.75rem;
-    left: 22rem;
-
-    width: 45px;
-    height: 45px;
-
-    background-image: url("data:image/png;base64,""" + LOGO_BASE64 + """);
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    filter: drop-shadow(0 0 12px rgba(139,92,246,0.6));
-    pointer-events: none;
-}
-
-
-/* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
-.nexus-logo {
-    position: fixed;
-    top: 0.75rem;
-    left: 22rem;
-    z-index: 1001;
-    pointer-events: none;
-    padding: 8px;
-    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.1) 50%, transparent 100%);
-    border-radius: 12px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(139,92,246,0.2);
-    box-shadow: 0 4px 16px rgba(139,92,246,0.3);
-}
-
-
-
-/* Logo image */
-.nexus-logo img {
-    width: 10px;
-    height: 10px;
-    display: block;
-    filter: drop-shadow(0 0 8px rgba(139,92,246,0.7));
-    animation: logo-pulse 3s ease-in-out infinite;
-}
-
-@keyframes logo-pulse {
-    0%, 100% { 
-        filter: drop-shadow(0 0 8px rgba(139,92,246,0.7));
-    }
-    50% { 
-        filter: drop-shadow(0 0 16px rgba(139,92,246,0.9));
-    }
-}
-
-/* Mobile / sidebar collapsed fallback */
-@media (max-width: 900px) {
-    .nexus-logo {
-        left: 1rem;
-    }
-}
 .stApp {
     overflow: auto;
 }
 
+/* Logo beside title styling */
+.title-with-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.logo-container {
+    padding: 12px;
+    background: radial-gradient(circle, rgba(59,130,246,0.2) 0%, rgba(139,92,246,0.15) 50%, transparent 100%);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139,92,246,0.3);
+    box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+    animation: logo-pulse 3s ease-in-out infinite;
+}
+
+.logo-container img {
+    width: 60px;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 0 10px rgba(139,92,246,0.8));
+}
+
+@keyframes logo-pulse {
+    0%, 100% { 
+        box-shadow: 0 4px 20px rgba(139,92,246,0.4);
+        border-color: rgba(139,92,246,0.3);
+    }
+    50% { 
+        box-shadow: 0 6px 30px rgba(139,92,246,0.6);
+        border-color: rgba(139,92,246,0.5);
+    }
+}
+
+.title-with-logo h1 {
+    margin-bottom: 0 !important;
+}
+
 </style>
-""", unsafe_allow_html=True)
-st.markdown(f"""
-<div class="nexus-logo">
-    <img src="data:image/png;base64,{LOGO_BASE64}" alt="Nexus Logo">
-</div>
 """, unsafe_allow_html=True)
 
 
@@ -608,8 +583,13 @@ if "prev_best" not in st.session_state:
     st.session_state.prev_best = None
 
 # ======================= HEADER =======================
-st.markdown("""
-<h1 style='text-align:center; margin-bottom:0.25rem;'>⚡ Nexus</h1>
+st.markdown(f"""
+<div class="title-with-logo">
+    <div class="logo-container">
+        <img src="data:image/png;base64,{LOGO_BASE64}" alt="Nexus Logo">
+    </div>
+    <h1>⚡ Nexus</h1>
+</div>
 <p style='text-align:center; color: var(--text-secondary); margin-bottom: 1rem;'>
     Intelligent server monitoring & selection powered by adaptive algorithms
 </p>
