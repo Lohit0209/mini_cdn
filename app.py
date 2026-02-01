@@ -28,18 +28,18 @@ st.markdown("""
 [data-testid="stHeader"]::after {
     content: "";
     position: absolute;
-    top: 0.65rem;
+    top: 0.75rem;
     left: 22rem;
 
-    width: 10px;
-    height: 10px;
+    width: 45px;
+    height: 45px;
 
     background-image: url("data:image/png;base64,""" + LOGO_BASE64 + """);
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
 
-    filter: drop-shadow(0 0 8px rgba(139,92,246,0.45));
+    filter: drop-shadow(0 0 12px rgba(139,92,246,0.6));
     pointer-events: none;
 }
 
@@ -47,19 +47,36 @@ st.markdown("""
 /* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
 .nexus-logo {
     position: fixed;
-    top: 1rem;
+    top: 0.75rem;
     left: 22rem;
     z-index: 1001;
     pointer-events: none;
+    padding: 8px;
+    background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, rgba(139,92,246,0.1) 50%, transparent 100%);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(139,92,246,0.2);
+    box-shadow: 0 4px 16px rgba(139,92,246,0.3);
 }
 
 
 
 /* Logo image */
 .nexus-logo img {
-    width: 10px;
+    width: 45px;
     height: auto;
-    filter: drop-shadow(0 0 10px rgba(139,92,246,0.55));
+    display: block;
+    filter: drop-shadow(0 0 8px rgba(139,92,246,0.7));
+    animation: logo-pulse 3s ease-in-out infinite;
+}
+
+@keyframes logo-pulse {
+    0%, 100% { 
+        filter: drop-shadow(0 0 8px rgba(139,92,246,0.7));
+    }
+    50% { 
+        filter: drop-shadow(0 0 16px rgba(139,92,246,0.9));
+    }
 }
 
 /* Mobile / sidebar collapsed fallback */
