@@ -8,6 +8,7 @@ import time
 from collections import deque
 from datetime import datetime
 import random
+import base64
 
 # ======================= PROBE =======================
 from probe import probe_server
@@ -19,6 +20,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+LOGO_BASE64 = base64.b64encode(open("nexus_logo.png", "rb").read()).decode()
+
 st.markdown("""
 <style>
 /* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
@@ -44,11 +47,12 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-st.markdown("""
+st.markdown(f"""
 <div class="nexus-logo">
-    <img src="nexus_logo.png" alt="Nexus Logo">
+    <img src="data:image/png;base64,{LOGO_BASE64}" alt="Nexus Logo">
 </div>
 """, unsafe_allow_html=True)
+
 
 
 
