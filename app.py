@@ -577,7 +577,7 @@ with btn_col1:
     start_btn = st.button("▶️ START MONITORING", use_container_width=True)
 
 with btn_col2:
-    stop_btn = st.button("⏸️ STOP", use_container_width=True)
+    stop_btn = st.button("⏸️ STOP MONITORING", use_container_width=True)
 
 st.markdown("<div style='height:30px'></div>", unsafe_allow_html=True)
 
