@@ -14,7 +14,7 @@ from probe import probe_server
 
 # ======================= PAGE CONFIG =======================
 st.set_page_config(
-    page_title="Nexus Load Balancer Pro",
+    page_title="Nexus",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
