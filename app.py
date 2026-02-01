@@ -31,8 +31,8 @@ st.markdown("""
     top: 0.65rem;
     left: 22rem;
 
-    width: 90px;
-    height: 36px;
+    width: 10px;
+    height: 10px;
 
     background-image: url("data:image/png;base64,""" + LOGO_BASE64 + """);
     background-size: contain;
