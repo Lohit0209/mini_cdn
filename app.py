@@ -24,13 +24,31 @@ LOGO_BASE64 = base64.b64encode(open("nexus_logo.png", "rb").read()).decode()
 
 st.markdown("""
 <style>
+/* === FIX LOGO TO STREAMLIT HEADER === */
+[data-testid="stHeader"]::after {
+    content: "";
+    position: absolute;
+    top: 0.75rem;
+    left: 22rem;
+    width: 110px;
+    height: 40px;
+    background-image: url("data:image/png;base64,""" + LOGO_BASE64 + """);
+    background-size: contain;
+    background-repeat: no-repeat;
+    filter: drop-shadow(0 0 10px rgba(139,92,246,0.55));
+    pointer-events: none;
+}
+
 /* === FIXED HEADER LOGO (RIGHT OF SIDEBAR) === */
 .nexus-logo {
     position: fixed;
     top: 1rem;
-    left: 22rem; /* actual Streamlit sidebar width in wide mode */
+    left: 22rem;
     z-index: 1001;
+    pointer-events: none;
 }
+
+
 
 /* Logo image */
 .nexus-logo img {
@@ -45,6 +63,10 @@ st.markdown("""
         left: 1rem;
     }
 }
+.stApp {
+    overflow: auto;
+}
+
 </style>
 """, unsafe_allow_html=True)
 st.markdown(f"""
