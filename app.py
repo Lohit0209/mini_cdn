@@ -9,21 +9,18 @@ from collections import deque
 from datetime import datetime
 import random
 
+# ======================= PROBE =======================
 from probe import probe_server
-import base64
 
-def load_image_base64(path):
-    with open(path, "rb") as f:
-        return base64.b64encode(f.read()).decode()
-
-
+# ======================= PAGE CONFIG =======================
 st.set_page_config(
-    page_title="Nexus",
+    page_title="Nexus Load Balancer Pro",
     page_icon="⚡",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
+# ======================= DEFAULT SERVERS =======================
 DEFAULT_SERVERS = [
     "https://www.google.com",
     "https://www.github.com",
@@ -33,7 +30,7 @@ DEFAULT_SERVERS = [
 if "SERVERS" not in st.session_state:
     st.session_state.SERVERS = DEFAULT_SERVERS.copy()
 
-
+# ======================= SCORING FUNCTION =======================
 def compute_score(pred_rtt, pred_load, pred_health, error_rate, pred_bandwidth,
                   alpha=1.0, beta=0.5, gamma=0.3, delta=0.2, epsilon=0.4):
 
@@ -51,10 +48,10 @@ def compute_score(pred_rtt, pred_load, pred_health, error_rate, pred_bandwidth,
         epsilon * bandwidth_penalty
     )
 
-
+# ======================= THEME (FIXED TO DARK) =======================
 st.session_state.theme = "dark"
 
-
+# ======================= STUNNING DARK THEME CSS =======================
 def get_ultimate_css(theme):
     return """
     <style>
@@ -381,58 +378,26 @@ def get_ultimate_css(theme):
     .glow-effect {
         animation: glow 3s ease-in-out infinite;
     }
-   
-[data-testid="stHeader"] {
-    display: none !important;
-}
-
-
-h1:first-of-type {
-    display: none !important;
-}
-
     </style>
     """
 
 st.markdown(get_ultimate_css(st.session_state.theme), unsafe_allow_html=True)
 
-
-
-
-
-
-
 # ======================= SIDEBAR - STORE VALUES IN SESSION STATE =======================
 with st.sidebar:
-    logo_base64 = load_image_base64("nexus_logo.png")
+    st.markdown("""
+    <div style="text-align:center; padding:1.5rem 1rem;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">⚙️</div>
+        <h2 style="margin-bottom:0.5rem;">Control Panel</h2>
+        <p style="font-size:0.8125rem; opacity:0.7; color: var(--text-secondary);">
+            Configure monitoring & servers
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
-    st.markdown(
-        f"""
-        <div style="
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 0.8rem 0.6rem 1rem 0.6rem;
-            margin-bottom: 0.5rem;
-        ">
-            <img src="data:image/png;base64,{logo_base64}"
-                 style="height:32px; width:auto;" />
-            <span style="
-                font-size: 1.15rem;
-                font-weight: 700;
-                color: #e5e7eb;
-                letter-spacing: 0.3px;
-            ">
-                Nexus
-            </span>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+    st.markdown("---")
 
-
-
-    
+    # -------- SERVER INPUT --------
     st.markdown("### 🌐 Server List")
 
     server_text = st.text_area(
@@ -484,14 +449,14 @@ with st.sidebar:
 
     st.markdown("---")
 
-   
+    # -------- MONITORING SETTINGS --------
     st.markdown("### ⏱ Monitoring Settings")
     st.session_state.rounds = st.slider("Rounds", 5, 100, st.session_state.get("rounds", 20))
     st.session_state.interval = st.slider("Interval (seconds)", 0.5, 5.0, st.session_state.get("interval", 1.0), 0.5)
 
     st.markdown("---")
 
-    
+    # -------- SCORING WEIGHTS --------
     st.markdown("### ⚖️ Scoring Weights")
     with st.expander("Advanced"):
         st.session_state.alpha = st.number_input("RTT Weight (α)", 0.0, 10.0, st.session_state.get("alpha", 1.0), 0.1)
@@ -501,7 +466,7 @@ with st.sidebar:
 
     st.markdown("---")
 
-   
+    # -------- BANDIT SETTINGS --------
     st.markdown("### 🎲 Selection Strategy")
     st.session_state.eps = st.slider("Exploration ε", 0.0, 0.6, st.session_state.get("eps", 0.2), 0.05)
     st.session_state.anti_stick = st.slider("Anti-stickiness", 0.0, 0.2, st.session_state.get("anti_stick", 0.03), 0.01)
@@ -516,7 +481,7 @@ with st.sidebar:
         time.sleep(0.8)
         st.rerun()
 
-
+# ======================= EXTRACT VALUES FROM SESSION STATE =======================
 rounds = st.session_state.get("rounds", 20)
 interval = st.session_state.get("interval", 1.0)
 alpha = st.session_state.get("alpha", 1.0)
@@ -526,7 +491,7 @@ delta = st.session_state.get("delta", 0.2)
 eps = st.session_state.get("eps", 0.2)
 anti_stick = st.session_state.get("anti_stick", 0.03)
 
-
+# ======================= SESSION STATE =======================
 if "monitoring_data" not in st.session_state:
     st.session_state.monitoring_data = {
         "plot_time": [],
@@ -559,15 +524,17 @@ if "current_round" not in st.session_state:
 if "prev_best" not in st.session_state:
     st.session_state.prev_best = None
 
-
+# ======================= HEADER =======================
 st.markdown("""
 <h1 style='text-align:center; margin-bottom:0.25rem;'>
-    ⚡ Nexus
+    ⚡ Nexus Load Balancer Pro
 </h1>
-
+<p style='text-align:center; color: var(--text-secondary); font-size: 1rem; margin-bottom: 2.5rem;'>
+    Intelligent server monitoring & selection powered by adaptive algorithms
+</p>
 """, unsafe_allow_html=True)
 
-
+# ======================= MAIN CONTROLS =======================
 btn_col1, btn_col2, btn_col3 = st.columns([2, 2, 6])
 
 with btn_col1:
@@ -586,7 +553,7 @@ st.markdown("<div style='height:20px'></div>", unsafe_allow_html=True)
 analytics_expander = st.expander("📊 Detailed Analytics", expanded=False)
 
 
-
+# ======================= BUTTON HANDLERS =======================
 if stop_btn:
     st.session_state.monitoring_active = False
 
@@ -617,7 +584,7 @@ if start_btn:
         "session_end": None
     }
 
-
+# ======================= BANDIT SELECTION =======================
 def bandit_select(score_map, prev_best, epsilon, anti_stick):
     adjusted = {}
     for s, v in score_map.items():
@@ -632,7 +599,7 @@ def bandit_select(score_map, prev_best, epsilon, anti_stick):
 
     return min(adjusted, key=lambda k: adjusted[k])
 
-
+# ======================= MONITOR ONE ROUND =======================
 def monitor_round(round_idx, alpha, beta, gamma, delta, epsilon, anti_stick):
     data = st.session_state.monitoring_data
     results = {}
@@ -689,7 +656,7 @@ def monitor_round(round_idx, alpha, beta, gamma, delta, epsilon, anti_stick):
 
     return best
 
-
+# ======================= METRIC CARDS =======================
 def render_metrics():
     data = st.session_state.monitoring_data
     cols = st.columns(len(st.session_state.SERVERS))
@@ -726,7 +693,7 @@ def render_metrics():
             else:
                 st.info("Awaiting data...")
 
-
+# ======================= LIVE MONITORING =======================
 info_placeholder = st.empty()
 
 if st.session_state.monitoring_active:
@@ -816,7 +783,7 @@ else:
         </div>
         """, unsafe_allow_html=True)
 
-
+# ======================= PLOTLY DASHBOARD =======================
 def render_charts(best_server=None):
     data = st.session_state.monitoring_data
     if not data["plot_time"]:
@@ -954,7 +921,7 @@ def render_charts(best_server=None):
 
     st.plotly_chart(fig, use_container_width=True)
 
-
+# ======================= CHART RENDER =======================
 with chart_container:
     if st.session_state.monitoring_data["plot_time"]:
         counts = st.session_state.monitoring_data["selection_count"]
